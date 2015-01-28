@@ -1,0 +1,17 @@
+1.
+
+Question 2. Selon la configuration, quel est le fichier que permet de lancer l’application ? Que contient t­il ?
+Le fichier qui permet de lancer l'application est le fichier './bin/www', qui permet la création du serveur sur le port 3000, et qui appelle le fichier './app.js' qui lui contient toutes les configurations, comme par exemple les routes, les templates engines (jade), etc.
+
+Question 3. Allez a l’url http://localhost:3000. Quel fichier permet d’afficher le contenu ? Y a t­il une méthode http utilisée ?  
+Le fichier qui permet d'afficher le contenu est le fichier './views/index.jade'. La method http utilisée est la méthode GET, qui récupère le contenu.
+
+Question 4. Qu’est­ce qu’une route en Express ?
+Une route en Express permet de définir un comportement particulier de l'application selon la requète effectuée. Cela inclue la route utilisée, la requète http spécifiée (GET, POST,...).
+
+Question 5. À quoi sert les fichiers jade ?
+Les fichiers jade sont des fichiers de templating, ils permettent de créer une vue (rendue en html) en lien avec les données gérées par l'application.
+
+Question 6. Qu’est­ce qu’un middleware en Express ?
+Un middleware permet d'effectuer des actions avec les objets request (req) et response (res).
+
