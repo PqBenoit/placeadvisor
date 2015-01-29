@@ -2,26 +2,7 @@ var express = require('express');
 var router = express.Router();
 var lodash = require('lodash');
 
-var initialise = [
-	{
-		id: 1,
-		name: 'MacDo',
-		placeType: 'Fastfood',
-		stars: 5
-	},
-	{
-		id: 2,
-		name: 'Quick',
-		placeType: 'Fastfood',
-		stars: 2
-	},
-	{
-		id: 3,
-		name: 'Subway',
-		placeType: 'Fastfood',
-		stars: 4
-	}
-]
+var Review = require('../models/review');
 
 
 ///////////////////////////////
@@ -30,32 +11,41 @@ var initialise = [
 
 
 router.get('/', function(req, res){	
-
-	res.send(initialise);
-
+	Review.find( {} , function(err, reviews){
+		if(err) {
+			res.send(404, err);
+		}
+		else {
+			res.send(200, reviews);
+		}
+	});
 });
 
 router.post('/', function(req, res){
 	
-	initialise.push(
-		{
-			id: initialise.length + 1,
-			name: req.body.name,
-			placeType: req.body.placeType,
-			stars: req.body.stars
+	review = new Review();
+	review.name = req.body.name;
+	review.placeType = req.body.placeType;
+	review.stars = req.body.stars;
+
+	review.save(function(err, review){
+		if(err){
+			res.send(400, err);
 		}
-	);
-
-	res.send(initialise);
-
+		else {
+			res.send(201, review);
+		}
+	});
 });
 
 router.delete('/', function(req, res){
 
-	initialise = [];
-
-	res.send(initialise);
-
+	Review.remove(function(err){
+		if(err)
+			res.send(404, err);
+		else
+			res.send(200, {message: 'Reviews deleted.'});
+	});
 });
 
 
@@ -66,28 +56,34 @@ router.delete('/', function(req, res){
 
 router.get('/:id', function(req, res){
 
-	res.send(initialise[req.params.id - 1]);
-
+	Review.findById(req.params.id, function(err, review){
+		if(err)
+			res.send(404, err);
+		else
+			res.send(200, review);
+	});
 });
 
 router.put('/:id', function(req, res){
 
-	initialise[req.params.id - 1].name = req.body.name;
-	initialise[req.params.id - 1].placeType = req.body.placeType;
-	initialise[req.params.id - 1].stars = req.body.stars;
-
-	res.send(initialise[req.params.id - 1]);
-
+	Review.update({ _id: req.params.id }, req.body, function(err, review){
+		if(err) {
+			res.send(404, err);
+		}
+		else {
+			res.send(200, {message: 'Review modified'});
+		}
+	});
 });
 
 router.delete('/:id', function(req, res){
 	
-	lodash.pullAt(initialise, [req.params.id - 1]);
-
-	res.send(initialise);
-
+	Review.remove({ _id: req.params.id }, function(err, review){
+		if(err)
+			res.send(404, err);
+		else
+			res.send(200, { message: 'Review deleted'});
+	});
 });
-
-
 
 module.exports = router;
