@@ -10,7 +10,7 @@ var Review = require('../models/review');
 ///////////////////////////////
 
 
-router.get('/', function(req, res){	
+router.get('/', function(req, res){
 	Review.find( {} , function(err, reviews){
 		if(err) {
 			res.send(404, err);
@@ -22,30 +22,36 @@ router.get('/', function(req, res){
 });
 
 router.post('/', function(req, res){
-	
-	review = new Review();
-	review.name = req.body.name;
-	review.placeType = req.body.placeType;
-	review.stars = req.body.stars;
+	if(req.isAuthenticated()){
+		review = new Review();
+		review.name = req.body.name;
+		review.placeType = req.body.placeType;
+		review.stars = req.body.stars;
 
-	review.save(function(err, review){
-		if(err){
-			res.send(400, err);
-		}
-		else {
-			res.send(201, review);
-		}
-	});
+		review.save(function(err, review){
+			if(err){
+				res.send(400, err);
+			}
+			else {
+				res.send(201, review);
+			}
+		});
+	}
+	else
+		res.json({message: 'You have to be authenticated to add a review'});
 });
 
 router.delete('/', function(req, res){
-
-	Review.remove(function(err){
-		if(err)
-			res.send(404, err);
-		else
-			res.send(200, {message: 'Reviews deleted.'});
-	});
+	if(req.isAuthenticated()){
+		Review.remove(function(err){
+			if(err)
+				res.send(404, err);
+			else
+				res.send(200, {message: 'Reviews deleted.'});
+		});
+	}
+	else
+		res.send({message: "You have to be authenticated to delete reviews"});
 });
 
 
@@ -66,24 +72,33 @@ router.get('/:id', function(req, res){
 
 router.put('/:id', function(req, res){
 
-	Review.update({ _id: req.params.id }, req.body, function(err, review){
-		if(err) {
-			res.send(404, err);
-		}
-		else {
-			res.send(200, {message: 'Review modified'});
-		}
-	});
+	if(req.isAuthenticated()){
+		Review.update({ _id: req.params.id }, req.body, function(err, review){
+			if(err) {
+				res.send(404, err);
+			}
+			else {
+				res.send(200, {message: 'Review modified'});
+			}
+		});
+	}
+	else
+		res.json({message: 'You have to be authenticated to modify a review'});
+
 });
 
 router.delete('/:id', function(req, res){
 	
-	Review.remove({ _id: req.params.id }, function(err, review){
-		if(err)
-			res.send(404, err);
-		else
-			res.send(200, { message: 'Review deleted'});
-	});
+	if(req.isAuthenticated()){
+		Review.remove({ _id: req.params.id }, function(err, review){
+			if(err)
+				res.send(404, err);
+			else
+				res.send(200, { message: 'Review deleted'});
+		});
+	}
+	else
+		res.send({message: "You have to be authenticated to delete reviews"});
 });
 
 module.exports = router;
