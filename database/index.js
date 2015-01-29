@@ -2,12 +2,9 @@
 
 var mongoose = require('mongoose');
 
-if(process.env.ENV == 'HEROKU'){
-	mongoose.connect(process.env.MONGO_STRING_CONNECTION);
-}
-else {
-	mongoose.connect('mongodb://localhost:27017/ws-restapi');
-}
+var mongolabStringConnexion = process.env.MONGO_STRING_CONNECTION || 'mongodb://localhost:27017/ws-restapi';
+
+mongoose.connect(mongolabStringConnexion);
 
 var db = mongoose.connection;
 
