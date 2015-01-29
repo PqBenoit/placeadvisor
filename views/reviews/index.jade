@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+	ul(class='col-sm-10 col-sm-offset-1')
+		each review in reviews
+			li
+				a(href='http://localhost:3000/reviews/#{review._id}' class='col-sm-2')= review.name
+				span(class='col-sm-2')= review.placeType
+				- var n = 0
+				div
+				while n < review.stars
+					img(src='/images/flag.png' width='25', height='25')
+					- var n = n + 1
+				
+				
