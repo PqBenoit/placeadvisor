@@ -3,3 +3,15 @@ extends ../layout
 block content
 	div(class="show-container col-sm-10 col-sm-offset-1")
 		h1= review.name
+		p= review.placeType
+
+		- var n = 0
+		div
+		while n < review.stars
+			img(src='/images/flag.png' width='20', height='20')
+			- var n = n + 1
+
+		p
+		a(href='http://localhost:3000/reviews/edit/#{review._id}') Edit 
+		span(style="color: #337ab7") | 
+		a(href="http://localhost:3000/") All reviews
