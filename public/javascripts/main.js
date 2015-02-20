@@ -6,7 +6,7 @@ $(document).ready(function(){
 	$('.remove-button').on('click', function(){
 
 		xmlhttp = new XMLHttpRequest();
-		xmlhttp.open('DELETE', 'http://localhost:3000/reviews/' + $(this).attr('data-id'), true);
+		xmlhttp.open('DELETE', '/reviews/' + $(this).attr('data-id'), true);
 		xmlhttp.send(null);
 
 		location.reload();
@@ -31,7 +31,7 @@ $(document).ready(function(){
 		});
 
 		$.ajax({
-			url: "http://localhost:3000/reviews/",
+			url: "/reviews/",
 			data: {
 				name: data[0],
 				placeType: data[1],
@@ -61,7 +61,7 @@ $(document).ready(function(){
 		});
 
 		$.ajax({
-			url: "http://localhost:3000/reviews/" + $(this).attr('data-id'),
+			url: "/reviews/" + $(this).attr('data-id'),
 			data: {
 				name: data[0],
 				placeType: data[1],
@@ -90,7 +90,7 @@ $(document).ready(function(){
 		});
 
 		$.ajax({
-			url: "http://localhost:3000/reviews/search",
+			url: "/reviews/search",
 			data: {
 				name: data[0],
 				placeType: data[1],
