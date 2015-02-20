@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+	div(class="show-container col-sm-10 col-sm-offset-1")
+		h1 Edit this review
+		form(action="/reviews/edit/#{review._id}" class="form-edition")
+			label Name
+			input(type="text" class="form-control" value="#{review.name}")
+			label Placetype
+			input(type="text" class="form-control" value="#{review.placeType}")
+			label Star(s) number
+			input(type="number" class="form-control" value="#{review.stars}")
+			input(data-id="#{review._id}" type="submit" class="edit-button btn btn-info")
+		div(class="alert alert-info" role="alert") Your review has been modified |
+			a(href="/")  Back to reviews
