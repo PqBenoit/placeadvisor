@@ -2,7 +2,7 @@ extends ../layout
 
 block content
 	div(class="col-sm-10 col-sm-offset-1")
-		form(action="http://localhost:3000/reviews/search" method="GET")
+		form(action="/reviews/search" method="GET")
 			div(class="col-sm-4")
 				label Name
 				input(type="text" class="form-control" name="name")
@@ -17,7 +17,7 @@ block content
 		- if (typeof(reviews) !== 'undefined'){
 			each review in reviews
 				li(class='review-li')
-					a(class='col-sm-3 link-to-review' href='http://localhost:3000/reviews/#{review._id}')= review.name
+					a(class='col-sm-3 link-to-review' href='/reviews/#{review._id}')= review.name
 					span(class='col-sm-3 span-to-review')= review.placeType
 					
 					- var n = 0
