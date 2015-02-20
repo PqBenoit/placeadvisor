@@ -6,10 +6,14 @@ block content
 			li
 				a(href='http://localhost:3000/reviews/#{review._id}' class='col-sm-2')= review.name
 				span(class='col-sm-2')= review.placeType
+				
 				- var n = 0
 				div
 				while n < review.stars
-					img(src='/images/flag.png' width='25', height='25')
+					img(src='/images/flag.png' width='20', height='20')
 					- var n = n + 1
+
+				- var id = review._id
+				button(class="remove-button" data-id="#{review._id}") Remove
 				
 				
