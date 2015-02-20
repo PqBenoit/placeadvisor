@@ -1,3 +1,12 @@
-li {
+.review-li {
    list-style: none;
+   margin-bottom: 10px;
+}
+
+.link-to-review, .span-to-review {
+	padding-top: 13px;
+}
+
+.stars-container {
+	padding-top: 10px;
 }

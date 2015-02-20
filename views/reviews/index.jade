@@ -3,17 +3,19 @@ extends ../layout
 block content
 	ul(class='col-sm-10 col-sm-offset-1')
 		each review in reviews
-			li
-				a(href='http://localhost:3000/reviews/#{review._id}' class='col-sm-2')= review.name
-				span(class='col-sm-2')= review.placeType
+			li(class='review-li')
+				a(class='col-sm-3 link-to-review' href='http://localhost:3000/reviews/#{review._id}')= review.name
+				span(class='col-sm-3 span-to-review')= review.placeType
 				
 				- var n = 0
-				div
-				while n < review.stars
-					img(src='/images/flag.png' width='20', height='20')
-					- var n = n + 1
+				div(class="col-sm-3 stars-container")
+					while n < review.stars
+						img(src='/images/flag.png' width='20', height='20')
+						- var n = n + 1
 
 				- var id = review._id
-				button(class="remove-button" data-id="#{review._id}") Remove
+				button(class="remove-button btn btn-danger" data-id="#{review._id}") Remove
+		li(class="review-li")
+			a(class="btn btn-info" href='reviews/new') Add a review
 				
 				
