@@ -58,6 +58,27 @@ router.delete('/', function(req, res){
 	});
 });
 
+router.get('/top', function(req, res){
+
+	var accept = accepts(req);
+
+	Review.find().sort({stars: -1}).limit(3).exec(function(err, reviews) {
+		if(err) {
+			res.send(404, err);
+		}
+		else {
+			if(accept.type(['json', 'html']) == 'json'){
+				res.setHeader('Content-Type', 'application/json');
+				res.send(200, reviews);
+			}
+			else if(accept.type(['json', 'html']) == 'html') {
+				res.setHeader('Content-Type', 'text/html')
+				res.render('reviews/index', { reviews: reviews });
+			}
+		}
+	});
+});
+
 
 ///////////////////////////////
 ////// Routes WITH id /////////
@@ -79,6 +100,25 @@ router.get('/:id', function(req, res){
 			else if(accept.type(['json', 'html']) == 'html') {
 				res.setHeader('Content-Type', 'text/html');
 				res.render('reviews/show', { review: review });
+			}
+	});
+});
+
+router.get('/edit/:id', function(req, res){
+
+	var accept = accepts(req);
+
+	Review.findById(req.params.id, function(err, review){
+		if(err)
+			res.send(404, err);
+		else
+			if(accept.type(['json', 'html']) == 'json'){
+				res.setHeader('Content-Type', 'application/json');
+				res.send(200, review);
+			}
+			else if(accept.type(['json', 'html']) == 'html') {
+				res.setHeader('Content-Type', 'text/html');
+				res.render('reviews/edit', { review: review });
 			}
 	});
 });

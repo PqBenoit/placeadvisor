@@ -9,6 +9,8 @@ $(document).ready(function(){
 		xmlhttp.open('DELETE', 'http://localhost:3000/reviews/' + $(this).attr('data-id'), true);
 		xmlhttp.send(null);
 
+		location.reload();
+
 	});
 
 	$('.edit-button').on('click', function(e){
@@ -30,7 +32,6 @@ $(document).ready(function(){
 				stars: data[2]
 			},
 			type: 'PUT',
-			contentType: "application/json",
 			dataType: 'json',
 			success: function(response){
 				$('.alert-info').fadeIn(300);
