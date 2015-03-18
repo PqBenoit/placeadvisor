@@ -1,3 +1,5 @@
+TP1.
+
 1.
 
 Question 2. Selon la configuration, quel est le fichier que permet de lancer l’application ? Que contient t­il ?
@@ -15,3 +17,6 @@ Les fichiers jade sont des fichiers de templating, ils permettent de créer une 
 Question 6. Qu’est­ce qu’un middleware en Express ?
 Un middleware permet d'effectuer des actions avec les objets request (req) et response (res).
 
+TP3.
+
+Question 1. Pourquoi quand on écrit cette URL dans le navigateur on obtient la liste des reviews et pas un autre des actions qu’on a créé dans nos routes ? 

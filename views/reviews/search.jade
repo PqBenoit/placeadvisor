@@ -1,0 +1,28 @@
+extends ../layout
+
+block content
+	div(class="col-sm-10 col-sm-offset-1")
+		form(action="/reviews/search" method="GET")
+			div(class="col-sm-4")
+				label Name
+				input(type="text" class="form-control" name="name")
+			div(class="col-sm-4")
+				label Place type
+				input(type="text" class="form-control" name="placeType")
+			div(class="col-sm-4")
+				label Stars number
+				input(type="number" class="form-control" name="stars")
+			input(type="submit" class="btn btn-info col-sm-2 col-sm-offset-5" value="Search")
+	ul(class='col-sm-10 col-sm-offset-1')
+		- if (typeof(reviews) !== 'undefined'){
+			each review in reviews
+				li(class='review-li')
+					a(class='col-sm-3 link-to-review' href='/reviews/#{review._id}')= review.name
+					span(class='col-sm-3 span-to-review')= review.placeType
+					
+					- var n = 0
+					div(class='stars-container')
+						while n < review.stars
+							img(src='/images/flag.png' width='20', height='20')
+							- var n = n + 1
+		-}
