@@ -2,8 +2,8 @@ doctype html
 html
 	head
 		title= title
-		link(rel='stylesheet', href='/stylesheets/styles.css')
 		link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+		link(rel='stylesheet', href='/stylesheets/styles.css')
 		script(type="text/javascript" src="/javascripts/jQuery.js")
 		script(type="text/javascript" src="/javascripts/main.js")
 
@@ -15,6 +15,7 @@ html
 						a(class="navbar-brand" href="/")
 							span Place Advisor
 						a(class="navbar-text" href="/reviews") Reviews
-						a(class="navbar-text" href="/users") Users
+						a(class="navbar-text" href="/reviews/top") Top 3
+						a(class="navbar-text" href="/reviews/search") Search
 		
 		block content
